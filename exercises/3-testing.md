@@ -21,10 +21,10 @@ First we need to add REST Assured to our pom.xml.
 </dependency>
 ```
 
-### Write tests
+### Write Tests
 
 Write two tests for the two operations `GET /api/v1/movies` and `GET /api/v1/movies/{id}` with REST Assured.
-Make sure you check JSON response body in your test. You can use the example below as starting point.
+Make sure you check the JSON responses in your tests. You can use the example below as starting point.
 
 ```java
 @RunWith(SpringRunner.class)
