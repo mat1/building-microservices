@@ -2,7 +2,10 @@
 
 In this exercise, you learn how to build your first Spring Boot Application and to deploy it to the Cloud.
 
-## Prerequisites
+## Prerequisite
+
+Before you can build and start the workshop you must install and confiugre the following products on your
+development machine:
 
 - Java 8
 - Maven
@@ -10,9 +13,9 @@ In this exercise, you learn how to build your first Spring Boot Application and 
 - github Account
 - Heroku Account
 
-## Step by Step
+## First Step
 
-### First Step
+In this step you build your first Spring Boot App:
 
 1. Got to http://start.spring.io/
 
@@ -20,15 +23,15 @@ In this exercise, you learn how to build your first Spring Boot Application and 
 
 ![spring](images/1-spring-init.png)
 
-> __Important__: Select dependency "Web"
+> __Note__: It is important to select dependency **Web**
 
 3. Click on "Generate Project"
 
 4. Import the Project in your Java IDE
 
-5. Start the MovieTicketServiceApplication from your IDE
+5. Start the **MovieTicketServiceApplication** from your IDE
 
-You should see the following on your console
+You should see the following on your console:
 
 ```bash
   .   ____          _            __ _ _
@@ -43,13 +46,13 @@ You should see the following on your console
 
 6. Open http://localhost:8080/ in the browser
 
-Then you should see the "Whitelabel Error Page" shown below
+Now you should see the "Whitelabel Error Page" shown below:
 
 ![spring](images/1-whitelabel.png)
 
-### Second Step
+## Second Step
 
-In this step you add a new REST endpoint and build and start the app from your command line
+In this step you add a new REST endpoint and build and start the app from your command line.
 
 1. Add a new Controller (Java class) to Spring Boot
 
@@ -69,7 +72,7 @@ public class HelloController {
 
 3. Open http://localhost:8080/hello in the browser
 
-You should see "Hello World" in your browser :)
+You should see `Hello World` in your browser :)
 
 4. Stop the App
 
@@ -85,13 +88,13 @@ mvn clean install
  java -jar ./target/movie-ticket-service-0.0.1-SNAPSHOT.jar
 ```
 
-If you open http://localhost:8080/hello in the browser you should still see "Hello World"
+If you open http://localhost:8080/hello in the browser you should still see `Hello World`
 
 7. Stop the App
 
-### Third Step
+## Third Step
 
-Now it is time to deploy your application to the cloud
+Now it is time to deploy your application to the cloud.
 
 1. Create a github repository https://github.com/
 
@@ -121,7 +124,7 @@ git push -u origin master
 
 8. Enable Automatic Deploys
 
-Your configuration should look like the configuration on the picture below
+Your configuration should look like the configuration on the picture below:
 
 ![spring](images/1-heroku-config.png)
 
@@ -129,6 +132,6 @@ Your configuration should look like the configuration on the picture below
 
 10. Open the App in your browser e.g. https://movie-ticket-service.herokuapp.com/hello
 
-Check if you see "Hello World" in your browser.
+Check if you see `Hello World` in your browser.
 
 You have finished the first excercise and deployed your first Spring Boot Application to the cloud.
