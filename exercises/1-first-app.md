@@ -10,8 +10,8 @@ development machine:
 - Java 8
 - Maven
 - IntelliJ or another Java IDE
-- github Account
-- Heroku Account
+- github account
+- Heroku account
 
 ## First Step
 
@@ -54,7 +54,7 @@ Now you should see the "Whitelabel Error Page" shown below:
 
 In this step you add a new REST endpoint and build and start the app from your command line.
 
-1. Add a new Controller (Java class) to Spring Boot
+1. Add a new Controller (Java class) to your application
 
 ```java
 @Controller
@@ -128,7 +128,7 @@ Your configuration should look like the configuration on the picture below:
 
 ![spring](images/1-heroku-config.png)
 
-9. Click on "Deploy Branch" to start Deployment
+9. Click on "Deploy Branch" to start the deployment
 
 10. Open the App in your browser e.g. https://movie-ticket-service.herokuapp.com/hello
 
