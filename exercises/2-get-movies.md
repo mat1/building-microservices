@@ -67,7 +67,7 @@ Get some more details about a specific movie for example movie ratings
 
 ### Test
 
-Open your browser an check if you open http://localhost:8080/api/v1/movies and http://localhost:8080/api/v1/movies/{id} returns the expected result. Or use curl ond the command line.
+Open http://localhost:8080/api/v1/movies and http://localhost:8080/api/v1/movies/{id} in your browser and check if it returns the expected result. Or use `curl` ond the command line.
 
 ```bash
 curl http://localhost:8080/api/v1/movies
@@ -113,6 +113,6 @@ public class SwaggerConfig {
 }
 ```
 
-Start your Spring Boot Application. Open http://localhost:8080/swagger-ui.html in your browser. You should see something simlar to the screenshot below:
+Start your Spring Boot Application. Open http://localhost:8080/swagger-ui.html in your browser. You should see something similar to the screenshot below:
 
 ![swagger](images/2-swagger.png)
