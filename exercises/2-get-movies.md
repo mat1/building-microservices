@@ -5,7 +5,7 @@ In this exercise, you build a REST enpoint which returns some information about 
 ## First Step
 
 The Movie Ticket Service should return a list with movies for which the user can buy some cinema tickets.
-Your task is to implement a REST controller **MoiveController** which should support two operations, list all movies and get some details about a specific movie. You can hardcode the return values.
+Your task is to implement a REST endpoint **MoiveController** which should support two operations, list all movies and get some details about a specific movie. You can hardcode the return values.
 
 ### List all movies
 
