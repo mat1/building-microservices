@@ -1,4 +1,4 @@
-# Are you there?
+# Are you There?
 
 In this exercise, you learn how to monitor your Spring Boot App and how to know if something is wrong.
 
