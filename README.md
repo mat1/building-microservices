@@ -12,6 +12,17 @@ Course material for the Building Microservices with Spring Boot Workshop @ Zuehl
 6. [Design for Failure](exercises/6-design-for-failure.md)
 7. [Monitoring](exercises/7-monitoring.md)
 
+## Solution
+
+- [Movie Ticket Service](https://github.com/mat1/movie-ticket-service)
+
+### Other Services
+
+The two services which are use in the exercises:
+
+- [Movie Service](https://github.com/mat1/movie-service)
+- [Movie Rating Service](https://github.com/mat1/movie-rating-service)
+
 ## Slides
 
 You can find all slides [here](slides).
