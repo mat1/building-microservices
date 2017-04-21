@@ -5,7 +5,7 @@ In this exercise, you learn how to monitor your Spring Boot App and how to know 
 ### Spring Boot Actuator
 
 Spring Boot Actuator provides many features to monitor and manage your REST service. Add Actuator to your pom.xml and start your Spring Boot App. You should now see many new REST endpoints in the console for example http://localhost:8080/health.
-You can find a detailed description to all actuator endpoints [here](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#production-ready-endpoints)
+You can find a detailed description about all actuator endpoints [here](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#production-ready-endpoints)
 
 ```xml
 <dependency>
@@ -26,5 +26,5 @@ The second task is to configure Feign to log all REST calls.
 ### Health Checks
 
 Spring Boot Actuator provides an `GET /health` endpoint which returns the health information about a service. It is possible to add your own health indicators to Spring Actuator. 
-Your task is to add an health check which calls `https://movie-service.herokuapp.com/health` to see if the `Movie Service` is available.
+Your task is to add an health check which calls `https://movie-service.herokuapp.com/health` to see if the *Movie Service* is available.
 You can find more infos about HealthIndicators [here](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#production-ready-health).
