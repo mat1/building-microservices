@@ -14,7 +14,8 @@ Course material for the Building Microservices with Spring Boot Workshop @ Zuehl
 
 ## Solution
 
-- [Movie Ticket Service](https://github.com/mat1/movie-ticket-service)
+The famous movie ticket service [Movie Ticket Service](https://github.com/mat1/movie-ticket-service).
+Every step is marked with a git tag. For example the first exercise [First Spring Boot App](https://github.com/mat1/movie-ticket-service/tree/1-firstApp).
 
 ### Other Services
 
