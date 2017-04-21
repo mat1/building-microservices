@@ -19,7 +19,7 @@ Every step is marked with a git tag. For example the first exercise [First Sprin
 
 ### Other Services
 
-The two services which are use in the exercises:
+The two services which are used in the exercises:
 
 - [Movie Service](https://github.com/mat1/movie-service)
 - [Movie Rating Service](https://github.com/mat1/movie-rating-service)
