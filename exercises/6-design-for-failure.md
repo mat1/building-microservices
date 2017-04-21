@@ -26,7 +26,7 @@ Your task is to configure the circuit breaker **only** for the `Movie Rating Ser
 
 ### Bonus: Hystrix Dashboard
 
-Hystrix provides a dashboard for monitoring Hystrix metrics like thread pool and circuit breaker.
+Hystrix provides a dashboard for monitoring Hystrix metrics like thread pools and circuit breakers.
 
 ![spring](images/6-hystrix-dashboard.png)
 
