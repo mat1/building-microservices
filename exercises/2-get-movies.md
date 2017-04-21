@@ -1,11 +1,11 @@
 # Get Movies
 
-In this exercise, you build a REST enpoint which returns some information about movies and you add swagger to your project for automatic API documentation.
+In this exercise, you build a REST endpoint which returns some information about movies and you add swagger to your project for automatic API documentation.
 
 ## First Step
 
 The Movie Ticket Service should return a list with movies for which the user can buy some cinema tickets.
-Your task is to implement a REST endpoint **MoiveController** which should support two operations, list all movies and get some details about a specific movie. You can hardcode the return values.
+Your task is to implement a REST endpoint **MoiveController** which should support two operations, list all movies and get some details about a specific movie. You can hardcore the return values.
 
 ### List all movies
 
@@ -67,7 +67,7 @@ Get some more details about a specific movie for example movie ratings
 
 ### Test
 
-Open http://localhost:8080/api/v1/movies and http://localhost:8080/api/v1/movies/{id} in your browser and check if it returns the expected result. Or use `curl` ond the command line.
+Open http://localhost:8080/api/v1/movies and http://localhost:8080/api/v1/movies/{id} in your browser and check if it returns the expected result. Or use `curl` on the command line.
 
 ```bash
 curl http://localhost:8080/api/v1/movies
@@ -75,8 +75,7 @@ curl http://localhost:8080/api/v1/movies
 
 ## Second Step
 
-It is really helpful to have tool which automaticly doucment your API. This makes it easy for other developers to integrate your service and also helps you to test your own service. In this excerise we use swagger for API documentation. You find more details about swagger
-here http://swagger.io/.
+It is really helpful to have tool which automatically document your API. This makes it easy for other developers to integrate your service and also helps you to test your own service. In this exercise we use swagger for API documentation. You can find more details about swagger [here](http://swagger.io/).
 
 ### Add Swagger
 

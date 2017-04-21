@@ -1,7 +1,7 @@
-# Configuation and Get Real Movies
+# Get Real Movies
 
-In this exercise, you will learn how to configure your spring boot application and how to integrate other REST services
-with Feign. You can find more details about Feign [here](https://github.com/OpenFeign/feign).
+In this exercise, you will learn how to integrate other REST services with Feign. 
+You can find more details about Feign [here](https://github.com/OpenFeign/feign).
 
 ### Add Feign
 
@@ -35,7 +35,7 @@ Add Feign to your pom.xml.
 
 ## Service Integration
 
-Your task is to get the movies from the **Movie Service** and the ratings from the **Movie Rating Service**.
+Your task is to fetch movies from the **Movie Service** and movie ratings from the **Movie Rating Service**.
 
 Below you find the API doucmentation for both services:
 
@@ -48,12 +48,10 @@ You can play around with swagger to get an better understanding for these REST s
 
 ### Get Some Real Movies
 
-Now it is time to get some real movies instead of the hard coded once in the *MovieController*. 
-The *MoiveController* should now make a REST call `GET https://movie-service.herokuapp.com/api/v1/movies` to fetch the movies from the *Movie Service*.
+The *MoiveController* should make a REST call `GET https://movie-service.herokuapp.com/api/v1/movies` to fetch the movies from the *Movie Service*.
 
 First you should create a class **MovieSerciceAdapter** which act as an adapter between the *Movie Service* and the *Movice Ticket Service*. This class should use Feign to call the external REST service.
-
-Below you find an Integration Test **MoviesAdapterIT** and an empty **MovieServiceAdapter** skeleton which you can use as a starting point.
+Below you find an Integration Test **MovieServiceAdapterIT** and an empty **MovieServiceAdapter** skeleton which you can use as a starting point.
 
 ```java
 // IntegrationTest
@@ -94,7 +92,7 @@ As soon as the Integration Test is green you can inject the *MovieServiceAdapter
 
 #### Feign Problems?
 
-Do you have problems making rest calls with feign? Below you find an factory and an example which makes it a little bit easier to create an Feign client.
+Do you have problems making rest calls with Feign? Below you find an factory and an example which makes it a little bit easier to create a Feign client.
 
 ```java
 // Feign RestClientFactory
@@ -123,24 +121,47 @@ public class MovieServiceAdapter {
 
     // ...
 }
+
+// MovieServiceApiClient Interface
+public interface MovieServiceApiClient {
+    @RequestLine("GET /api/v1/movies")
+    List<MovieServiceResponse> getMovies();
+
+    @RequestLine("GET /api/v1/movies/{id}")
+    MovieServiceResponse getMovieById(@Param("id") long id);
+}
 ```
 
 ### Get the Details
 
-Add the method `getMovieById(long id)` on the **MovieServiceAdapter** which should call `GET /api/v1/movies/{id}` on the *Movie Service*.
+Add the method `getMovieById(long id)` to the **MovieServiceAdapter**. This method should call `GET /api/v1/movies/{id}` on the *Movie Service*.
 
 ```java
 
-public Optional<Movie> getMovieById(long id) {
+public Optional<MovieDetail> getMovieById(long id) {
     return null;
+}
+
+```
+
+```java
+
+// IntegrationTest
+@Test
+public void getMovieById() throws Exception {
+    MovieServiceAdapter movieServiceAdapter = new MovieServiceAdapter("https://movie-service.herokuapp.com/");
+
+    Optional<MovieDetail> movieDetail = movieServiceAdapter.getMovieById(1);
+
+    assertThat(movieDetail.isPresent(), is(true));
 }
 
 ```
 
 ### Get the Ratings
 
-Pretty similar to the previous task. Now you should get the movie ratings from the *Movie Rating Service*.
-Create an *RatingAdapter* simliar to the *MovieAdapter* in the first task. You find an Integration Test and a Sekelton for the *RatingAdapter* below:
+Pretty similar to the previous task. The *Movie Ticket Service* should get the movie ratings from the *Movie Rating Service*.
+Create a class called **RatingAdapter** similar to the *MovieAdapter* in the first task. You find an Integration Test and a Skeleton for the *RatingAdapter* below:
 
 ```java
 // IntegrationTest
@@ -157,6 +178,7 @@ public class RatingAdapterIT {
         List<Rating> ratings = ratingAdapter.getRatingsById(1);
 
         assertThat(ratings, hasSize(3));
+        assertThat(ratings, hasItem(new Rating("Internet Movie Database", "8.3/10")));
     }
 
 }
@@ -180,15 +202,20 @@ public class RatingAdapter {
 
 As soon as the Integration Test is green you can inject the *RatingAdapter* into the *MovieController*. 
 Now you can call the *MovieServiceAdapter* first to get the details about a movie and afterwards the *RatingAdapter* to get the ratings.
-Your **MovieController* should now look simliar to the code below:
+Your **MovieController** should now look similar to the code below:
 
 ```java
 @RequestMapping("/api/v1/")
 @Controller
 public class MovieController {
 
-    private final MovieServiceAdapter movieServiceAdapter = new MovieServiceAdapter("https://movie-service.herokuapp.com/");
-    private final RatingAdapter ratingAdapter = new RatingAdapter("https://movie-rating-service.herokuapp.com/");
+    private final MovieServiceAdapter movieServiceAdapter;
+    private final RatingAdapter ratingAdapter;
+
+    public MovieController(MovieServiceAdapter movieServiceAdapter, RatingAdapter ratingAdapter) {
+        this.movieServiceAdapter = movieServiceAdapter;
+        this.ratingAdapter = ratingAdapter;
+    }
 
     @GetMapping("/movies")
     @ResponseBody
@@ -199,16 +226,46 @@ public class MovieController {
     @GetMapping("/movies/{id}")
     @ResponseBody
     public MovieDetail getMovieById(@PathVariable("id") long id) {
-        return new MovieDetail(1,
-                "Batman Begins",
-                "https://images-na.ssl-images-amazon.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg",
-                "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.",
-                2005,
-                "Action",
-                asList(new Rating("Internet Movie Database", "8.3/10"), new Rating("Rotten Tomatoes", "84%")));
+        Optional<MovieDetail> movieDetail = movieServiceAdapter.getMovieById(id);
+        List<Rating> ratings = ratingAdapter.getRatingsById(id);
+
+        return movieDetail.map(m -> m.setRatings(ratings))
+                .orElseThrow(() -> new MovieNotFoundException("No movie found with id=" + id));
     }
 }
 ```
 
-If you start your Spring Boot App now `GET /api/v1/movies/1` should return the movie *Batman* with 3 ratings.
+If you start your Spring Boot App and call `GET /api/v1/movies/5` should return the JSON below:
+
+```json
+{
+  "id": 5,
+  "title": "The Dark Knight",
+  "poster": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+  "plot": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the Dark Knight must come to terms with one of the greatest psychological tests of his ability to fight injustice.",
+  "year": 2008,
+  "genre": "Action, Crime, Drama",
+  "ratings": [
+    {
+      "source": "Internet Movie Database",
+      "value": "9.0/10"
+    },
+    {
+      "source": "Rotten Tomatoes",
+      "value": "94%"
+    },
+    {
+      "source": "Metacritic",
+      "value": "82/100"
+    }
+  ]
+}
+```
+### Bonus: Fix the Component Test
+
+The current component test calls now the two external REST services (Movie Rating Service and Movie Service).
+This can lead to build failures, because the component test will be executed during the build.
+To fix the component test, you should mock the two Adapters (MovieServiceAdapter and RatingAdapter) in the **MovieControllerComponentTest**. So that these two adapters return a hard coded response instead of making a HTTP request. 
+You can use [@MockBean](http://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/mock/mockito/MockBean.html) and Mockito to mock the two adapters. Both libraries are already included in Spring Boot.
+
 

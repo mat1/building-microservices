@@ -6,7 +6,7 @@ In this exercise, you will write some component tests with REST Assured.
 
 Your task is to write some component tests for the MovieController. You should test the two operations `GET /api/v1/movies` and `GET /api/v1/movies/{id}`.
 
-REST Assured is a library which helps you to test REST services with Java. You can find more deatils about REST Assured [here](http://rest-assured.io/).
+REST Assured is a library which helps you to test REST services with Java. You can find more details about REST Assured [here](http://rest-assured.io/).
 
 ### Add REST Assured
 

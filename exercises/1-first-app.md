@@ -4,7 +4,7 @@ In this exercise, you learn how to build your first Spring Boot Application and 
 
 ## Prerequisite
 
-Before you can build and start the workshop you must install and confiugre the following products on your
+Before you can build and start the workshop you must install and configure the following products on your
 development machine:
 
 - Java 8
@@ -120,7 +120,7 @@ git push -u origin master
 
 6. Select deployment method GitHub (Connect to Github)
 
-7. Select your previous created repository on github e.g. movie-ticket-serivice
+7. Select your previous created repository on github e.g. movie-ticket-service
 
 8. Enable Automatic Deploys
 
@@ -134,4 +134,4 @@ Your configuration should look like the configuration on the picture below:
 
 Check if you see `Hello World` in your browser.
 
-You have finished the first excercise and deployed your first Spring Boot Application to the cloud.
+You have finished the first exercise and deployed your first Spring Boot Application to the cloud.
