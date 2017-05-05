@@ -8,11 +8,11 @@ To check that your Hystrix configuration works correctly you should use this [Lo
 
 ### Timeouts
 
-The **MovieControllerLoadIT** test fails sometimes, because some calls reach the timeout configured in Hystrix. Your task is to increase the default Hystrix timeout to 5 Seconds.
+The **MovieControllerLoadIT** test fail sometimes, because some calls reach the timeout configured in Hystrix. Your task is to increase the default Hystrix timeout to 5 Seconds.
 
 ### Fallback
 
-The `GET /api/v1/movies/1` call fails if the rating service is not available. Implement a fallback function so that if the rating service is not available an empty rating list is returned. You should use the fallback functionality from Feign for this [see](https://github.com/OpenFeign/feign/tree/master/hystrix).
+The `GET /api/v1/movies/1` call fail if the rating service is not available. Implement a fallback function so that if the rating service is not available an empty rating list is returned. You should use the fallback functionality from Feign for this [see](https://github.com/OpenFeign/feign/tree/master/hystrix).
 
 If you have implemented the fallback correctly, the load test should pass.
 
