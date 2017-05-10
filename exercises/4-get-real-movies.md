@@ -37,7 +37,7 @@ Add Feign to your pom.xml.
 
 Your task is to fetch movies from the **Movie Service** and movie ratings from the **Movie Rating Service**.
 
-Below you find the API doucmentation for both services:
+Below you find the API documentation for both services:
 
 | Service               | Url           |
 | --------------------- | ------------- | 
