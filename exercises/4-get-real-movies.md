@@ -37,7 +37,7 @@ Add Feign to your pom.xml.
 
 Your task is to fetch movies from the **Movie Service** and movie ratings from the **Movie Rating Service**.
 
-Below you find the API doucmentation for both services:
+Below you find the API documentation for both services:
 
 | Service               | Url           |
 | --------------------- | ------------- | 
@@ -48,7 +48,7 @@ You can play around with swagger to get an better understanding for these REST s
 
 ### Get Some Real Movies
 
-The *MoiveController* should make a REST call `GET https://movie-service.herokuapp.com/api/v1/movies` to fetch the movies from the *Movie Service*.
+The *MovieController* should make a REST call `GET https://movie-service.herokuapp.com/api/v1/movies` to fetch the movies from the *Movie Service*.
 
 First you should create a class **MovieSerciceAdapter** which act as an adapter between the *Movie Service* and the *Movice Ticket Service*. This class should use Feign to call the external REST service.
 Below you find an Integration Test **MovieServiceAdapterIT** and an empty **MovieServiceAdapter** skeleton which you can use as a starting point.
