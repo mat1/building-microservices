@@ -1,10 +1,10 @@
 # Configuration
 
-In this exercise, you learn how to configure your Spring Boot App. You can find more details about how the Spring Boot Configuration mechanism works [here](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html).
+In this exercise, you learn how to configure your Spring Boot App. You can find more details about how the Spring Boot configuration mechanism works [here](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html).
 
 ### Externalized Configuration
 
-Your task is to make the two endpoint URLs configurable. The URLs should be configured in the `application.properties` file similar to 
+Your task is to make the two endpoint URLs configurable. The URLs should be configured in the `application.properties` file similar to
 the example below:
 
 ```

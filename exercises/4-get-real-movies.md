@@ -1,6 +1,6 @@
 # Get Real Movies
 
-In this exercise, you will learn how to integrate other REST services with Feign. 
+In this exercise, you will learn how to integrate external REST services with Feign.
 You can find more details about Feign [here](https://github.com/OpenFeign/feign).
 
 ### Add Feign
@@ -13,7 +13,7 @@ Add Feign to your pom.xml.
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-dependencies</artifactId>
-            <version>Dalston.RELEASE</version>
+            <version>Edgware.SR1</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -26,9 +26,9 @@ Add Feign to your pom.xml.
         <artifactId>spring-cloud-starter-feign</artifactId>
     </dependency>
     <dependency>
-        <groupId>com.netflix.feign</groupId>
+        <groupId>io.github.openfeign</groupId>
         <artifactId>feign-jackson</artifactId>
-        <version>8.18.0</version>
+        <version>9.5.0</version>
     </dependency>
 </dependencies>
 ```
@@ -40,7 +40,7 @@ Your task is to fetch movies from the **Movie Service** and movie ratings from t
 Below you find the API documentation for both services:
 
 | Service               | Url           |
-| --------------------- | ------------- | 
+| --------------------- | ------------- |
 | Movie Service         | https://movie-service.herokuapp.com/swagger-ui.html         |
 | Movie Rating Service  | https://movie-rating-service.herokuapp.com/swagger-ui.html  |
 
@@ -51,12 +51,12 @@ You can play around with swagger to get an better understanding for these REST s
 The *MovieController* should make a REST call `GET https://movie-service.herokuapp.com/api/v1/movies` to fetch the movies from the *Movie Service*.
 
 First you should create a class **MovieSerciceAdapter** which act as an adapter between the *Movie Service* and the *Movice Ticket Service*. This class should use Feign to call the external REST service.
-Below you find an Integration Test **MovieServiceAdapterIT** and an empty **MovieServiceAdapter** skeleton which you can use as a starting point.
+Below you find an Integration Test **MovieServiceAdapterIT** and an empty **MovieServiceAdapter** skeleton and the class **MovieServiceResponse** which you can use as a starting point.
 
 ```java
 // IntegrationTest
 public class MovieServiceAdapterIT {
-    
+
     // Hystrix will be explained later in the course
     static {
         System.setProperty("hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds", "5000");
@@ -84,6 +84,61 @@ public class MovieServiceAdapter {
 
     public List<Movie> getAll() {
         return null;
+    }
+}
+```
+
+```java
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+// Class for converting json string to a java object
+public class MovieServiceResponse {
+
+    private final long id;
+    private final String title;
+    private final String poster;
+    private final String plot;
+    private final int year;
+    private final String genre;
+
+    @JsonCreator
+    public MovieServiceResponse(@JsonProperty("id") long id,
+                                @JsonProperty("Title") String title,
+                                @JsonProperty("Poster") String poster,
+                                @JsonProperty("Plot") String plot,
+                                @JsonProperty("Year") int year,
+                                @JsonProperty("Genre") String genre) {
+        this.id = id;
+        this.title = title;
+        this.poster = poster;
+        this.plot = plot;
+        this.year = year;
+        this.genre = genre;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public String getPlot() {
+        return plot;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getGenre() {
+        return genre;
     }
 }
 ```
@@ -131,6 +186,10 @@ public interface MovieServiceApiClient {
     MovieServiceResponse getMovieById(@Param("id") long id);
 }
 ```
+
+#### Stil some integration problems?
+
+Have a look at the solution: [solution](https://github.com/mat1/movie-ticket-service/tree/4-get-real-movies/src/main/java/com/zuehlke/movie/movieservice)
 
 ### Get the Details
 
@@ -189,7 +248,7 @@ public class RatingAdapterIT {
 public class RatingAdapter {
 
     public RatingAdapter(String url) {
-        
+
     }
 
     public List<Rating> getRatingsById(long id) {
@@ -200,7 +259,7 @@ public class RatingAdapter {
 
 ### Combine the Details and the Ratings
 
-As soon as the Integration Test is green you can inject the *RatingAdapter* into the *MovieController*. 
+As soon as the Integration Test is green you can inject the *RatingAdapter* into the *MovieController*.
 Now you can call the *MovieServiceAdapter* first to get the details about a movie and afterwards the *RatingAdapter* to get the ratings.
 Your **MovieController** should now look similar to the code below:
 
@@ -265,7 +324,5 @@ If you start your Spring Boot App and call `GET /api/v1/movies/5` should return 
 
 The current component test calls now the two external REST services (Movie Rating Service and Movie Service).
 This can lead to build failures, because the component test will be executed during the build.
-To fix the component test, you should mock the two Adapters (MovieServiceAdapter and RatingAdapter) in the **MovieControllerComponentTest**. So that these two adapters return a hard coded response instead of making a HTTP request. 
+To fix the component test, you should mock the two Adapters (MovieServiceAdapter and RatingAdapter) in the **MovieControllerComponentTest**. So that these two adapters return a hard coded response instead of making a real HTTP request.
 You can use [@MockBean](http://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/mock/mockito/MockBean.html) and Mockito to mock the two adapters. Both libraries are already included in Spring Boot.
-
-

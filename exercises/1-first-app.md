@@ -7,7 +7,7 @@ In this exercise, you learn how to build your first Spring Boot Application and 
 Before you can build and start the workshop you must install and configure the following products on your
 development machine:
 
-- Java 8
+- At least Java 8
 - Maven
 - IntelliJ or another Java IDE
 - github account
@@ -15,11 +15,11 @@ development machine:
 
 ## First Step
 
-In this step you build your first Spring Boot App:
+In this chapter you build your first Spring Boot App:
 
 1. Got to http://start.spring.io/
 
-2. Fill out the form as shown on the picture below
+2. Fill out the form as shown on the picture below (current version: 1.5.10)
 
 ![spring](images/1-spring-init.png)
 

@@ -8,7 +8,7 @@ To check that your Hystrix configuration works correctly you should use this [Lo
 
 ### Timeouts
 
-The **MovieControllerLoadIT** test fail sometimes, because some calls reach the timeout configured in Hystrix. Your task is to increase the default Hystrix timeout to 5 Seconds.
+The **MovieControllerLoadIT** test fails sometimes, because some calls reach the timeout configured in Hystrix. Your task is to increase the default Hystrix timeout to 5 Seconds.
 
 ### Fallback
 
@@ -34,6 +34,13 @@ Add the Hystrix dashboard to your Spring Boot Application and see what happens i
 You can use the **MovieControllerLoadIT** for that. But you have to modify the test like in the example below:
 
 > __Note__: You need to add spring-boot-starter-actuator, spring-cloud-starter-hystrix and spring-cloud-starter-hystrix-dashboard as dependency in your pom.xml. And you have to @EnableHystrix and @EnableHystrixDashboard to see the dashboard.
+
+Useful links for local development:
+
+| Links               | Url           |
+| --------------------- | ------------- |
+| Dashboard        | http://localhost:8080/hystrix        |
+| Hystrix Stream   | http://localhost:8080/hystrix.stream  |
 
 ```java
 public class MovieControllerLoadIT {
