@@ -11,6 +11,7 @@ Course material for the Building Microservices with Spring Boot Workshop @ Zuehl
 5. [Configuration](exercises/5-config.md)
 6. [Design for Failure](exercises/6-design-for-failure.md)
 7. [Monitoring](exercises/7-monitoring.md)
+8. [Bonus: Reactive with Spring Boot 2](exercises/8-reactive.md)
 
 ## Solution
 
