@@ -44,13 +44,13 @@ Below you find the API documentation for both services:
 | Movie Service         | https://movie-service.herokuapp.com/swagger-ui.html         |
 | Movie Rating Service  | https://movie-rating-service.herokuapp.com/swagger-ui.html  |
 
-You can play around with swagger to get an better understanding for these REST services.
+You can play around with Swagger to get a better understanding for these REST services.
 
 ### Get Some Real Movies
 
 The *MovieController* should make a REST call `GET https://movie-service.herokuapp.com/api/v1/movies` to fetch the movies from the *Movie Service*.
 
-First you should create a class **MovieSerciceAdapter** which act as an adapter between the *Movie Service* and the *Movice Ticket Service*. This class should use Feign to call the external REST service.
+First you should create a class **MovieServiceAdapter** which acts as an adapter between the *Movie Service* and the *Movice Ticket Service*. This class should use Feign to call the external REST service.
 Below you find an Integration Test **MovieServiceAdapterIT** and an empty **MovieServiceAdapter** skeleton and the class **MovieServiceResponse** which you can use as a starting point.
 
 ```java
